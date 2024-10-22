@@ -16,7 +16,6 @@
   users.users.m1.home = "/Users/m1";
   users.users.m1.shell = pkgs.bash;
 
-  programs.zsh.enable = false;
   programs.bash.enable = true;
   programs.bash.completion.enable = true;
   # TODO bashrc
