@@ -23,6 +23,7 @@ in
     pkgs.vscode-extensions.davidanson.vscode-markdownlint
     pkgs.vscode-extensions.esbenp.prettier-vscode
     pkgs.vscode-extensions.redhat.vscode-yaml
+    pkgs.vscode-extensions.jnoortheen.nix-ide
     # pkgs.vscode-extensions.xabikos.javaScriptSnippets
     # "nhedger.ts-esbuild-problem-matchers" # do I need this?
   ];
