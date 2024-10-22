@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  bashConfigTerminal = builtins.readFile ../settings/bash-configure-terminal.sh;
+  bashUtils = builtins.readFile ../settings/bash-utils.sh;
+in
+{
   home.stateVersion = "22.11";
   programs.git = {
     enable = true;
@@ -23,6 +28,16 @@
   ];
   programs.vscode.keybindings = import ../settings/vscode-keybindings.nix;
   programs.vscode.userSettings = import ../settings/vscode-settings.nix;
+
+  programs.bash.enable = true;
+  programs.bash.enableCompletion = true;
+  programs.bash.historyControl = [ "ignoredups" "ignorespace" ];
+  programs.bash.historyFileSize = 1000000;
+  programs.bash.historySize = 100000;
+  programs.bash.initExtra = ''
+    ${bashConfigTerminal}
+    ${bashUtils}
+  '';
 
   targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
   # targets.darwin.currentHostDefaults."com.apple.controlcenter"."NSStatusItem Visible Battery" = true; # Not sure if this works
