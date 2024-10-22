@@ -19,6 +19,8 @@
   programs.zsh.enable = false;
   programs.bash.enable = true;
   programs.bash.completion.enable = true;
+  # TODO bashrc
+  # TODO bash completion
 
   system.activationScripts.users.text = ''
     echo "Setting bash as default shell for user"
@@ -36,7 +38,6 @@
     # TODO control what shows in menu bar (top right)
     # TODO allow arc & zoom to share camera
     # TODO configure terminal profile
-    # TODO bashrc
     # TODO move the CustomUserPreferences to their own file
     CustomUserPreferences = {
       "com.apple.symbolichotkeys" = {
