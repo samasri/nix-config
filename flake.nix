@@ -17,9 +17,10 @@
       darwinConfig = darwinModule {
         inherit nixpkgs self;
       };
+      hostname = ""; # Add hostname
     in
     {
-      darwinConfigurations."1ae94743-4ad9-4e00-a144-f6dfb4bab4dc" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
         modules = [
           darwinConfig
           home-manager.darwinModules.home-manager
@@ -33,8 +34,6 @@
           }
         ];
       };
-      darwinPackages = self.darwinConfigurations."1ae94743-4ad9-4e00-a144-f6dfb4bab4dc".pkgs;
+      darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
     };
 }
-
-# Call with: darwin-rebuild switch -v --flake ~/.config/nix-darwin
