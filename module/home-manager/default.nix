@@ -21,8 +21,8 @@
     # pkgs.vscode-extensions.xabikos.javaScriptSnippets
     # "nhedger.ts-esbuild-problem-matchers" # do I need this?
   ];
-  programs.vscode.keybindings = import ../vscode-settings/keybindings.nix;
-  programs.vscode.userSettings = import ../vscode-settings/settings.nix;
+  programs.vscode.keybindings = import ../settings/vscode-keybindings.nix;
+  programs.vscode.userSettings = import ../settings/vscode-settings.nix;
 
   targets.darwin.currentHostDefaults."com.apple.controlcenter".BatteryShowPercentage = true;
   # targets.darwin.currentHostDefaults."com.apple.controlcenter"."NSStatusItem Visible Battery" = true; # Not sure if this works
