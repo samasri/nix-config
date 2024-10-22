@@ -37,6 +37,7 @@
     # TODO allow arc & zoom to share camera
     # TODO configure terminal profile
     # TODO bashrc
+    # TODO move the CustomUserPreferences to their own file
     CustomUserPreferences = {
       "com.apple.symbolichotkeys" = {
         AppleSymbolicHotKeys = {

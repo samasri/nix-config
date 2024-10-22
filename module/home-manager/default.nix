@@ -5,6 +5,7 @@
     userName = "Samer Almasri";
     userEmail = "almasri@ualberta.ca";
     extraConfig.init.defaultBranch = "main";
+    # TODO: find a way to sign by default
   };
   programs.vscode.enable = true;
   programs.vscode.extensions = [
