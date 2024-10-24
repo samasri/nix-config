@@ -37,7 +37,6 @@ in
     finder._FXShowPosixPathInTitle = true;
     dock.autohide = true;
     # TODO control what shows in menu bar (top right)
-    # TODO allow arc & zoom to share camera
     # TODO configure terminal profile
     CustomUserPreferences = import ../settings/system-defaults.nix;
   };
