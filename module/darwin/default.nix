@@ -1,4 +1,8 @@
-{ self, nixpkgs }: { pkgs, ... }: {
+{ self, nixpkgs }: { pkgs, ... }:
+let
+  username = "m1";
+in
+{
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages =
     [
@@ -13,12 +17,15 @@
     ];
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  users.users.m1.home = "/Users/m1";
-  users.users.m1.shell = pkgs.bash;
+  users.users.${username} = {
+    home = "/Users/${username}";
+    shell = pkgs.bash;
+  };
+
 
   system.activationScripts.users.text = ''
     echo "Setting bash as default shell for user"
-    dscl . -create /Users/m1 UserShell /run/current-system/sw/bin/bash
+    dscl . -create /Users/${username} UserShell /run/current-system/sw/bin/bash
   '';
 
   system.defaults = {

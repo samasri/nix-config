@@ -1,5 +1,8 @@
 { pkgs, ... }:
 let
+  username = "m1";
+  name = "Samer Almasri";
+  email = "almasri@ualberta.ca";
   bashConfigTerminal = builtins.readFile ../settings/bash-configure-terminal.sh;
   bashUtils = builtins.readFile ../settings/bash-utils.sh;
 in
@@ -7,8 +10,8 @@ in
   home.stateVersion = "22.11";
   programs.git = {
     enable = true;
-    userName = "Samer Almasri";
-    userEmail = "almasri@ualberta.ca";
+    userName = name;
+    userEmail = email;
     extraConfig.init.defaultBranch = "main";
     # TODO: find a way to sign by default
   };

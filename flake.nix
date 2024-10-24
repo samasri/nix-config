@@ -18,6 +18,7 @@
         inherit nixpkgs self;
       };
       hostname = ""; # Add hostname
+      username = "m1";
     in
     {
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
@@ -29,7 +30,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
-              users.m1.imports = [ ./module/home-manager ];
+              users.${username}.imports = [ ./module/home-manager ];
             };
           }
         ];
