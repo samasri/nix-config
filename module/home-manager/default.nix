@@ -31,7 +31,6 @@ in
     userName = name;
     userEmail = email;
     extraConfig.init.defaultBranch = "main";
-    # TODO: find a way to sign by default
   };
   programs.vscode.enable = true;
   programs.vscode.extensions = [
