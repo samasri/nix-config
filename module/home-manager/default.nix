@@ -49,6 +49,7 @@ in
   ];
   programs.vscode.keybindings = import ../settings/vscode-keybindings.nix;
   programs.vscode.userSettings = import ../settings/vscode-settings.nix;
+  # TODO: use pkgs.writeShellScriptBin to write `vscode` instead of adding it in bashrc
 
   programs.bash.enable = true;
   programs.bash.enableCompletion = true;
