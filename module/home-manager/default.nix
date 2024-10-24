@@ -8,6 +8,24 @@ let
 in
 {
   home.stateVersion = "22.11";
+  home.activation = {
+    generateSshKey = ''
+      KEY_PATH="$HOME/.ssh/ed25519";
+      if [ -f "$KEY_PATH" ]; then
+        echo "SSH key already exists at $KEY_PATH."
+      else
+        echo "SSH key not found. Generating a new SSH key..."
+        run ${pkgs.openssh_hpn}/bin/ssh-keygen -t ed25519 -C "${email}" -f "$KEY_PATH" -N ""
+      fi
+    '';
+  };
+
+  programs.ssh = {
+    enable = true;
+    matchBlocks = import ../settings/ssh-matchblocks.nix;
+    serverAliveInterval = 60;
+    extraConfig = "StrictHostKeyChecking no";
+  };
   programs.git = {
     enable = true;
     userName = name;
