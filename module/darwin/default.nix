@@ -36,7 +36,6 @@ in
     finder.FXPreferredViewStyle = "Nlsv";
     finder._FXShowPosixPathInTitle = true;
     dock.autohide = true;
-    # TODO control what shows in menu bar (top right)
     # TODO configure terminal profile
     CustomUserPreferences = import ../settings/system-defaults.nix;
   };
