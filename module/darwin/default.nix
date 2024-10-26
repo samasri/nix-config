@@ -33,6 +33,7 @@ in
     NSGlobalDomain.InitialKeyRepeat = 14;
     NSGlobalDomain.KeyRepeat = 1;
     NSGlobalDomain."com.apple.trackpad.scaling" = 1.5;
+    NSGlobalDomain.AppleInterfaceStyle = "Dark";
     finder.FXPreferredViewStyle = "Nlsv";
     finder._FXShowPosixPathInTitle = true;
     dock.autohide = true;
