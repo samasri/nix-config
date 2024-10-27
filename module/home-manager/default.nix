@@ -26,6 +26,9 @@ in
     serverAliveInterval = 60;
     extraConfig = "StrictHostKeyChecking no";
   };
+
+  programs.gpg.enable = true;
+
   programs.git = {
     enable = true;
     userName = name;
