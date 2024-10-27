@@ -1,8 +1,4 @@
-{ self, nixpkgs }: { pkgs, ... }:
-let
-  username = "m1";
-in
-{
+{ self, nixpkgs, username }: { pkgs, ... }: {
   nixpkgs = {
     config.allowUnfree = true;
     hostPlatform = "aarch64-darwin";

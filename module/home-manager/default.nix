@@ -1,6 +1,5 @@
-{ pkgs, config, ... }:
+{ pkgs, config, username, ... }:
 let
-  username = "m1";
   name = "Samer Almasri";
   email = "almasri@ualberta.ca";
   bashConfigTerminal = builtins.readFile ../settings/bash-configure-terminal.sh;
@@ -30,7 +29,7 @@ in
   programs = {
     ssh = {
       enable = true;
-      matchBlocks = import ../settings/ssh-matchblocks.nix;
+      matchBlocks = import ../settings/ssh-matchblocks.nix { inherit username; };
       serverAliveInterval = 60;
       extraConfig = "StrictHostKeyChecking no";
     };

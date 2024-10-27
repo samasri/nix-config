@@ -13,12 +13,11 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
     let
-      darwinModule = import ./module/darwin/default.nix;
-      darwinConfig = darwinModule {
-        inherit nixpkgs self;
-      };
       hostname = ""; # Add hostname
-      username = "m1";
+      username = ""; # Add username
+      darwinConfig = import ./module/darwin/default.nix {
+        inherit nixpkgs self username;
+      };
     in
     {
       darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
@@ -30,6 +29,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "backup";
+              extraSpecialArgs = { inherit username; };
               users.${username}.imports = [ ./module/home-manager ];
             };
           }
