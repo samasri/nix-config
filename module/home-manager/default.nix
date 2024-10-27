@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   username = "m1";
   name = "Samer Almasri";
@@ -19,6 +19,11 @@ in
       fi
     '';
   };
+  home.packages = [
+    (pkgs.writeShellScriptBin "vscode" ''
+      ${config.programs.vscode.package}/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron "$@"
+    '')
+  ];
 
   programs.ssh = {
     enable = true;
@@ -52,7 +57,6 @@ in
   ];
   programs.vscode.keybindings = import ../settings/vscode-keybindings.nix;
   programs.vscode.userSettings = import ../settings/vscode-settings.nix;
-  # TODO: use pkgs.writeShellScriptBin to write `vscode` instead of adding it in bashrc
 
   programs.bash.enable = true;
   programs.bash.enableCompletion = true;

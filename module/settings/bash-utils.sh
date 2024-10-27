@@ -12,8 +12,3 @@ _get_path() {
 export_path() {
   export PATH=$(_get_path $@):$PATH
 }
-
-# Start VSCode
-vscode() {
-    ~/Applications/Home\ Manager\ Apps/Visual\ Studio\ Code.app/Contents/MacOS/Electron "$@"
-}
