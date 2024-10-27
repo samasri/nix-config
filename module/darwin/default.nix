@@ -3,50 +3,52 @@ let
   username = "m1";
 in
 {
-  nixpkgs.config.allowUnfree = true;
-  environment.systemPackages =
-    [
-      pkgs.vim
-      pkgs.arc-browser
-      pkgs.zoom-us
-      pkgs.docker
-      pkgs.kubectl
-      pkgs.colima
-      pkgs.k9s
-      pkgs.nixpkgs-fmt
-    ];
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs = {
+    config.allowUnfree = true;
+    hostPlatform = "aarch64-darwin";
+  };
+  nix.settings.experimental-features = "nix-command flakes";
+
+  environment.systemPackages = with pkgs; [
+    vim
+    arc-browser
+    zoom-us
+    docker
+    kubectl
+    colima
+    k9s
+    nixpkgs-fmt
+  ];
 
   users.users.${username} = {
     home = "/Users/${username}";
     shell = pkgs.bash;
   };
 
-
-  system.activationScripts.users.text = ''
-    echo "Setting bash as default shell for user"
-    dscl . -create /Users/${username} UserShell /run/current-system/sw/bin/bash
-  '';
-
-  system.defaults = {
-    NSGlobalDomain.AppleShowAllExtensions = true;
-    NSGlobalDomain.InitialKeyRepeat = 14;
-    NSGlobalDomain.KeyRepeat = 1;
-    NSGlobalDomain."com.apple.trackpad.scaling" = 1.5;
-    NSGlobalDomain.AppleInterfaceStyle = "Dark";
-    finder.FXPreferredViewStyle = "Nlsv";
-    finder._FXShowPosixPathInTitle = true;
-    dock.autohide = true;
-    # TODO configure terminal profile
-    CustomUserPreferences = import ../settings/system-defaults.nix;
+  system = {
+    configurationRevision = self.rev or self.dirtyRev or null;
+    stateVersion = 5;
+    activationScripts.users.text = ''
+      echo "Setting bash as default shell for user"
+      dscl . -create /Users/${username} UserShell /run/current-system/sw/bin/bash
+    '';
+    defaults = {
+      NSGlobalDomain = {
+        AppleShowAllExtensions = true;
+        InitialKeyRepeat = 14;
+        KeyRepeat = 1;
+        "com.apple.trackpad.scaling" = 1.5;
+        AppleInterfaceStyle = "Dark";
+      };
+      finder = {
+        FXPreferredViewStyle = "Nlsv";
+        _FXShowPosixPathInTitle = true;
+      };
+      dock.autohide = true;
+      # TODO configure terminal profile
+      CustomUserPreferences = import ../settings/system-defaults.nix;
+    };
   };
 
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
-  system.configurationRevision = self.rev or self.dirtyRev or null;
   services.nix-daemon.enable = true; # Auto upgrade nix package and the daemon service.
-  system.stateVersion = 5;
-  nix.settings.experimental-features = "nix-command flakes";
 }
